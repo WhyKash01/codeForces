@@ -15,11 +15,16 @@ int main()
         }
         else{
             int diff=b-c;
+            int min =c;
             if(diff<0){
                 diff=-diff;
+                min=b;
             }
             if(diff%2==0){
                 if(diff/2<=a+1){
+                    cout<<"1 ";
+                }
+                else if(diff<=a+min){
                     cout<<"1 ";
                 }
                 else{
@@ -30,11 +35,16 @@ int main()
                 cout<<"0 ";
             }
             diff=a-c;
+            min =c;
             if(diff<0){
                 diff=-diff;
+                min=a;
             }
             if(diff%2==0){
                 if(diff/2<=b+1){
+                    cout<<"1 ";
+                }
+                else if(diff<=b+min){
                     cout<<"1 ";
                 }
                 else{
@@ -42,16 +52,19 @@ int main()
                 }
             }
             else{
-                
                     cout<<"0 ";
-                
             }
             diff=a-b;
+            min =b;
             if(diff<0){
                 diff=-diff;
+                min=a;
             }
             if(diff%2==0){
                 if(diff/2<=c+1){
+                    cout<<"1 ";
+                }
+                else if(diff<=c+min){
                     cout<<"1 ";
                 }
                 else{
