@@ -12,30 +12,33 @@ int main()
         cin >> n;
         string s;
         cin>>s;
-        int count=0;
-        vector<int> rep(n,0);
-        int i=0;
-        int ans=0;
-        while (count!=n-1)
+        int ans=n-1;
+        for (int i = 0; i < n; i++)
         {
-            if(s[i]=='A'&&s[i+1]=='B'&&rep[i]==0 ){
-                rep[i]=1;
-                char temp=s[i];
-                s[i]=s[i+1];
-                s[i+1]=temp;
-                count=0;
-                ans++;
-            }
-            else if(i==n-1){
-                i=0;
+            if(s[i]=='B'){
+                ans--;
             }
             else{
-                count++;
-                i++;
+                break;
             }
         }
+        for (int i = n-1; i >= 0; i--)
+        {
+            if(s[i]=='A'){
+                ans--;
+            }
+            else{
+                break;
+            }
+        }
+        if(ans>=0){
+            cout<<ans<<endl;
+        }
+        else{
+            cout<<0<<endl;
+        }
         
-        cout<<ans<<endl;
+        
         
         t--;
     }
