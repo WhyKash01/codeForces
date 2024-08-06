@@ -24,8 +24,10 @@ int main()
                 s[i]=s[i+1];
                 s[i+1]=temp;
                 count=0;
-                i=0;
                 ans++;
+            }
+            else if(i==n-1){
+                i=0;
             }
             else{
                 count++;
