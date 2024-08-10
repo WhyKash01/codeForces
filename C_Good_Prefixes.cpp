@@ -13,24 +13,33 @@ int main()
         long long arr[n];
         for (int i = 0; i < n; i++)
         {
-            cin>>arr[i];
+            cin >> arr[i];
         }
-        
-        int count=0;
+        long long arrr[n];
+        int count = 0;
+        long long ans = 0;
+        long long Max = 0;
         for (int i = 0; i < n; i++)
         {
-            long long ans=0;
-            long long Max=0;
-            for (int j = 0; j < i+1; j++)
+            Max = max(Max, arr[i]);
+            arrr[i] = Max;
+            ans += arr[i];
+        }
+
+        // sort(arr,arr+n);
+
+        for (int i = n - 1; i >= 0; i--)
+        {
+
+            if (ans - arrr[i] == arrr[i])
             {
-                Max=max(Max,arr[j]);
-                ans+=arr[j];
-            }
-            if(ans-Max==Max){
+
                 count++;
             }
+            ans = ans - arr[i];
         }
-        cout<<count<<endl;
+
+        cout << count << endl;
         t--;
     }
 }
