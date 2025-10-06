@@ -4,6 +4,19 @@
 using namespace std;
 ll M = 1000000007;
 using namespace std;
+struct custom_hash {
+    static uint64_t splitmix64(uint64_t x) {
+        x += 0x9e3779b97f4a7c15;
+        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
+        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
+        return x ^ (x >> 31);
+    }
+
+    size_t operator()(uint64_t x) const {
+        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
+        return splitmix64(x + FIXED_RANDOM);
+    }
+};
 int Ceil(int x, int y)
 {
     return ceil(static_cast<double>(x) / y);
@@ -17,7 +30,7 @@ int main()
         int n,m;
         cin>>n>>m;
         vector<ll> v;
-        unordered_map<ll,ll> map;
+        unordered_map<ll,ll,custom_hash> map;
         for (int i = 0; i < n; i++)
         {
             ll x;

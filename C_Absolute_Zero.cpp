@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+void solve()
+{
+    ll n;
+    cin >> n;
+    ll a[n];
+    for (int i = 0; i < n; i++)
+    {
+        cin>>a[i];
+    }
+    ll e=0,o=0;
+    for (int i = 0; i < n; i++)
+    {
+        if(a[i]%2==0){
+            e++;
+        }
+        else{
+            o++;
+        }
+    }
+    if(e==0||o==0){
+        vector<int> v;
+        for (int i = 29; i >= 0; i--){
+            v.push_back(1 << i);
+        }
+        if (e)
+            v.push_back(1);
+        cout << v.size() <<endl;
+        for (int x : v)
+            cout << x << " ";
+        cout << endl;
+    }
+    else{
+        cout<<-1<<endl;
+    }
+    
+    return;
+}
+
+int32_t main()
+{
+    cin.tie(0)->sync_with_stdio(0);
+    int tc = 1;
+    cin >> tc;
+    while (tc--)
+        solve();
+    return 0;
+}

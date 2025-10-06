@@ -91,7 +91,10 @@
     "typeindex": "cpp",
     "typeinfo": "cpp",
     "variant": "cpp",
-    "math.h": "c"
+    "math.h": "c",
+    "generator": "cpp",
+    "text_encoding": "cpp",
+    "print": "cpp"
   },
   "cmake.preferredGenerators": []
 }

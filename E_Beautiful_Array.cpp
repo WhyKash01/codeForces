@@ -1,0 +1,42 @@
+
+#include <bits/stdc++.h>
+#define ll long long
+#define LCM(a, b) (a) * ((b) / std::__gcd(a, b))
+using namespace std;
+int Ceil(int x, int y)
+{
+    return ceil(static_cast<double>(x) / y);
+}
+int Floor(int x, int y)
+{
+    return floor(static_cast<double>(x) / y);
+}
+const ll M = 1000000007;
+
+bool comp(pair<int, ll> a, pair<int, ll> b)
+{
+    if (a.first == b.first)
+    {
+        return a.second < b.second;
+    }
+    return a.first > b.first;
+}
+
+int main()
+{
+
+    ll a, b;
+    cin >> a >> b;
+    vector<ll> v;
+    v.push_back(b);
+    v.push_back(b);
+    ll c = a * 3 - b * 2;
+    v.push_back(c);
+    sort(v.begin(), v.end());
+    cout << 3 << endl;
+    for (int i = 0; i < v.size(); i++)
+    {
+        cout << v[i] << " ";
+    }
+    cout << endl;
+}

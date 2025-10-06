@@ -1,53 +1,64 @@
-#include <iostream>
-#include <vector>
-#define MOD 1000000007
+#include <bits/stdc++.h>
 using namespace std;
+#define LCM(a, b) (a) * ((b) / std::__gcd(a, b));
+#define int long long
+#define pii pair<int,int>
+#define fr first
+#define sc second
+#define vi vector<int>
+#define vvi vector<vector<int>>
+#define vpii vector<pair<int,int>>
+#define pb push_back
+#define ppb pop_back
+#define inp(v) for(auto& x : v) cin >> x;
+#define rep(i,a,b) for(int i = a; i < b; i++)
+#define all(v) (v).begin(),(v).end()
 
-// Function to compute x^y % p in O(log y)
-long long power(long long x, long long y, long long p) {
-    long long res = 1; // Initialize result
-    x = x % p; // Update x if it is more than or equal to p
+int M=1e9+7;
+int power(int x, int y, int p) {
+    int res = 1; 
+    x = x % p; 
 
     while (y > 0) {
-        // If y is odd, multiply x with result
         if (y & 1)
             res = (res * x) % p;
 
-        // y must be even now
-        y = y >> 1; // y = y/2
-        x = (x * x) % p; // Change x to x^2
+        y = y >> 1; 
+        x = (x * x) % p; 
     }
     return res;
 }
-
-int main() {
-    int t;
-    cin >> t;
-
-    while (t--) {
-        int n;
+void solve()
+{
+    int n;
         cin >> n;
-        vector<long long> a(n);
-
-        long long sum = 0, sum_sq = 0;
+        vi a(n);
+        int sum = 0, sq = 0;
         for (int i = 0; i < n; ++i) {
             cin >> a[i];
-            sum = (sum + a[i]) % MOD;
-            sum_sq = (sum_sq + a[i] * a[i]) % MOD;
+            sum = (sum + a[i]) % M;
+            sq = (sq + a[i] * a[i]) % M;
         }
-
-        // Number of pairs
-        long long pairs = (n * (n - 1) / 2) % MOD;
-
-        // Calculate the sum of all products
-        long long sum_products = ((sum * sum - sum_sq) % MOD + MOD) % MOD;
-        sum_products = (sum_products * power(2, MOD - 2, MOD)) % MOD;
-
-        // Calculate the expected value (P*Q^-1) % MOD
-        long long result = (sum_products * power(pairs, MOD - 2, MOD)) % MOD;
-
+        int p = (n * (n - 1) / 2) % M;
+        int ans = ((sum * sum - sq) % M + M) % M;
+        ans = (ans * power(2, M - 2, M)) % M;
+        int result = (ans * power(p, M - 2, M)) % M;
         cout << result << endl;
-    }
-
-    return 0;
+        return;
 }
+
+
+signed main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    int t = 1;
+    cin>>t;
+    while(t--)
+    {
+        solve();
+    }
+}
+
+
