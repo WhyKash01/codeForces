@@ -11,28 +11,20 @@ int query(int a, int b) {
     return response;
 }
 
-void solve(int n) {
+void solve() {
     vector<pair<int, int>> edges;
-
-    vector<int> parent(n + 1, -1);
-
-    for (int i = 2; i <= n; ++i) {
-        int p = query(1, i);
-        parent[i] = p;
-        edges.push_back({p, i});
-    }
-
-    for (int i = 2; i <= n; ++i) {
-        for (int j = i + 1; j <= n; ++j) {
-            int p = query(i, j);
-            if (p == i) {
-                edges.push_back({i, j});
-                parent[j] = i;
-            } else if (p == j) {
-                edges.push_back({j, i});
-                parent[i] = j;
+    int n;
+    cin>>n;
+    for(int i=2;i<=n;i++){
+        int j=1;
+        while(true){
+            int x=query(j,i);
+            if(x==i||x==j){
+                edges.push_back({j,i});
+                break;
             }
-        }
+            j=x;
+        } 
     }
 
     cout << "! ";
@@ -47,9 +39,7 @@ int main() {
     int t;
     cin >> t;
     while (t--) {
-        int n;
-        cin >> n;
-        solve(n);
+        solve();
     }
     return 0;
 }

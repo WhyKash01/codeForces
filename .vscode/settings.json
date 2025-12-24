@@ -96,5 +96,6 @@
     "text_encoding": "cpp",
     "print": "cpp"
   },
-  "cmake.preferredGenerators": []
+  "cmake.preferredGenerators": [],
+  "C_Cpp.errorSquiggles": "disabled"
 }
