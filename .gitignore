@@ -24,8 +24,12 @@
 *.out
 *.app
 
-# CP Helper (VS Code Extension)
+# VS Code & CP Helper
 .cph/
+.vscode/
+
+# Output directories
+output/
 
 # OS generated files
 .DS_Store
