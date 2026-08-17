@@ -11,6 +11,7 @@ using namespace std;
 #define vvi vector<vector<int>>
 #define vpii vector<pair<int, int>>
 #define pb push_back
+#define sz(v) (int)v.size()
 #define ppb pop_back
 #define inp(v)        \
     for (auto &x : v) \
@@ -18,54 +19,54 @@ using namespace std;
 #define rep(i, a, b) for (int i = a; i < b; i++)
 #define all(v) (v).begin(), (v).end()
 int MOD = 1e9 + 7;
-bool dfs(vector<vector<int>> &adj,vector<int> &v,int curr)
-{   
-    bool ans=true;
-    for(auto z:adj[curr]){
-        if(v[z]!=-1){
-            if(v[z]==v[curr]) return false;
-        }
-        else{
-            v[z]=v[curr]^1;
-            ans=ans && dfs(adj,v,z);
-        }
-    }
-    return ans;
-}
+
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
-    vector<vector<int>> adj(n + 1);
-    vector<pair<int,int>>p;
-    for (int i = 0; i < k; i++)
+    int n; cin>>n;
+    vector<string> v(n); 
+    for(int i=0;i<n;i++){
+        cin>>v[i];
+    }
+    vector<vector<int>> graph(26);
+    vector<int> indegree(26);
+    string ans="";
+    for(int i=1;i<n;i++)
     {
-        int x, y;
-        cin >> x >> y;
-        p.push_back({x,y});
-        adj[x].push_back(y);
-        adj[y].push_back(x);
-    }
-    vector<int>v(n+1,-1);
-    v[1]=0;
-    bool f=dfs(adj,v,1);
-    if(!f){
-        cout<<"NO\n";
-    }
-    else{
-        cout<<"YES\n";
-        string s;
-        for(auto [x,y]:p){
-            if(v[x]==0){
-                s.push_back('1');
-            }
-            else{
-                s.push_back('0');
-            }
+        int curr=0;
+        while(curr<sz(v[i-1]) and curr<sz(v[i]) and v[i-1][curr]==v[i][curr])
+        {
+            curr++;
         }
-        cout<<s<<endl;
+        if(curr<sz(v[i-1]) and curr<sz(v[i]) and v[i-1][curr]!=v[i][curr])
+        {
+            graph[v[i-1][curr]-'a'].pb(v[i][curr]-'a');
+            indegree[v[i][curr]-'a']++;
+        }
+        else if(curr<sz(v[i-1]) and curr==sz(v[i]))
+        {
+            cout<<"Impossible\n";
+            return;
+        }
     }
-}
+    set<int> st;
+    for(int i=0;i<26;i++)
+    {
+        if(indegree[i]==0) st.insert(i);
+    }
+    while(!st.empty())
+    {
+        int node=*st.begin(); 
+        st.erase(st.begin());
+        ans.pb('a'+node);
+        for(auto &it:graph[node])
+        {
+            indegree[it]--;
+            if(indegree[it]==0) st.insert(it);
+        }
+    }
+    if(sz(ans)<26) cout<<"Impossible\n";
+    else cout<<ans<<endl;
+}   
 
 signed main()
 {
